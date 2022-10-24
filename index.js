@@ -2,47 +2,54 @@
  * @Author: shaolong
  * @Date: 2022-10-23 15:38:49
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 10:25:32
+ * @LastEditTime: 2022-10-24 11:27:19
  * @Description:
  */
 
-export const base64AddWaterMaker = (base64Img, wmConfig) => {
-  if (wmConfig.textArray.length === 0) {
-    console.error("****没有水印内容*****");
-    return base64Img;
+export default class WaterMaker {
+  constructor(base64Img, wmConfig) {
+    this.base64Img = base64Img;
+    this.wmConfig = wmConfig;
   }
+  render() {
+    if (this.wmConfig.textArray.length === 0) {
+      console.error("****没有水印内容*****");
+      return this.base64Img;
+    }
 
-  return new Promise((resolve, reject) => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    let resultBase64 = null;
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      let resultBase64 = null;
 
-    img.onload = function () {
-      canvas.width = img.width;
-      canvas.height = img.height;
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-      //canvas绘制图片，0 0  为左上角坐标原点
-      ctx.drawImage(img, 0, 0);
-      //写入水印
-      drawWaterMark(ctx, img.width, img.height, wmConfig);
-      resultBase64 = canvas.toDataURL("image/png");
+        //canvas绘制图片，0 0  为左上角坐标原点
+        ctx.drawImage(img, 0, 0);
+        //写入水印
+        drawWaterMark(ctx, img.width, img.height, this.wmConfig);
+        resultBase64 = canvas.toDataURL("image/png");
 
-      if (wmConfig.fileType == "blob") {
-        resultBase64 = base64ToBlob(resultBase64);
-      }
-      if (!resultBase64) {
-        reject();
-      } else {
-        resolve(resultBase64);
-      }
-    };
-    img.src = base64Img;
-  });
-};
+        if (this.wmConfig.fileType == "blob") {
+          resultBase64 = base64ToBlob(resultBase64);
+        }
+        if (!resultBase64) {
+          reject();
+        } else {
+          resolve(resultBase64);
+        }
+      };
+      img.src = this.base64Img;
+    });
+  }
+}
 
 //画布添加水印
 const drawWaterMark = (ctx, imgWidth, imgHeight, wmConfig) => {
+  debugger;
   try {
     let fontSize;
     if (imgWidth >= 3456) {

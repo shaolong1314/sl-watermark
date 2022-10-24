@@ -2,7 +2,7 @@
  * @Author: shaolong
  * @Date: 2022-10-24 10:34:29
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 10:56:30
+ * @LastEditTime: 2022-10-24 11:29:51
  * @Description:
 -->
 
@@ -13,11 +13,11 @@
 ---
 
 ```
-npm run install @watermark.js
+npm run install sl-watermark
 
 or
 
-yarn add @watermark.js
+yarn add sl-watermark
 ```
 
 ### 使用
@@ -25,7 +25,7 @@ yarn add @watermark.js
 ---
 
 ```
-import { base64AddWaterMaker } from "@watermark.js";
+import WaterMaker from "sl-watermark";
 
 // 配置
 const config = {
@@ -52,8 +52,10 @@ const config = {
 
 
 // 使用
-const result = await base64AddWaterMaker(file, config);
-console.log(result);
+  const _WaterMaker = new WaterMaker(file, config);
+_WaterMaker.render().then(res => {
+  console.log(res)
+})
 
 ```
 
