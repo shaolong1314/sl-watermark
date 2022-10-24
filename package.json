@@ -1,11 +1,15 @@
 {
   "name": "sl-watermark",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "为图片添加时间、位置等水印",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "watermark",
+    "js"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:shaolong1314/-watermark.js.git"
