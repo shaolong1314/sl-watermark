@@ -2,7 +2,7 @@
  * @Author: shaolong
  * @Date: 2022-10-23 15:38:49
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 11:27:19
+ * @LastEditTime: 2022-10-24 11:52:43
  * @Description:
  */
 
@@ -49,7 +49,6 @@ export default class WaterMaker {
 
 //画布添加水印
 const drawWaterMark = (ctx, imgWidth, imgHeight, wmConfig) => {
-  debugger;
   try {
     let fontSize;
     if (imgWidth >= 3456) {
