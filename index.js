@@ -2,7 +2,7 @@
  * @Author: shaolong
  * @Date: 2022-10-23 15:38:49
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 11:52:43
+ * @LastEditTime: 2022-10-24 14:35:30
  * @Description:
  */
 
@@ -22,6 +22,7 @@ export default class WaterMaker {
       const ctx = canvas.getContext("2d");
       const img = new Image();
       let resultBase64 = null;
+      img.src = this.base64Img;
 
       img.onload = () => {
         canvas.width = img.width;
@@ -42,7 +43,6 @@ export default class WaterMaker {
           resolve(resultBase64);
         }
       };
-      img.src = this.base64Img;
     });
   }
 }

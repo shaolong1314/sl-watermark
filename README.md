@@ -2,7 +2,7 @@
  * @Author: shaolong
  * @Date: 2022-10-24 10:34:29
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 11:29:51
+ * @LastEditTime: 2022-10-24 14:36:02
  * @Description:
 -->
 
@@ -52,7 +52,7 @@ const config = {
 
 
 // 使用
-  const _WaterMaker = new WaterMaker(file, config);
+  const _WaterMaker = new WaterMaker(base64Img, config);
 _WaterMaker.render().then(res => {
   console.log(res)
 })
