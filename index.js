@@ -2,7 +2,7 @@
  * @Author: shaolong
  * @Date: 2022-10-23 15:38:49
  * @LastEditors: shaolong
- * @LastEditTime: 2022-10-24 14:35:30
+ * @LastEditTime: 2022-11-04 11:56:54
  * @Description:
  */
 
@@ -21,7 +21,7 @@ export default class WaterMaker {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
       const img = new Image();
-      let resultBase64 = null;
+      let result = null;
       img.src = this.base64Img;
 
       img.onload = () => {
@@ -32,15 +32,17 @@ export default class WaterMaker {
         ctx.drawImage(img, 0, 0);
         //写入水印
         drawWaterMark(ctx, img.width, img.height, this.wmConfig);
-        resultBase64 = canvas.toDataURL("image/png");
 
-        if (this.wmConfig.fileType == "blob") {
-          resultBase64 = base64ToBlob(resultBase64);
+        result = canvas.toDataURL("image/jpeg", 0.3);
+
+        if (this.wmConfig.fileType && this.wmConfig.fileType == "blob") {
+          result = base64ToBlob(result);
         }
-        if (!resultBase64) {
-          reject();
+
+        if (result) {
+          resolve(result);
         } else {
-          resolve(resultBase64);
+          reject("未知错误");
         }
       };
     });
