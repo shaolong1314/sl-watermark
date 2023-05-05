@@ -71,8 +71,14 @@ const drawWaterMark = (ctx, imgWidth, imgHeight, wmConfig) => {
       fontSize = 30;
     } else if (imgWidth >= 500) {
       fontSize = 20;
-    } else {
+    } else if (imgWidth >= 400) {
       fontSize = 18;
+    } else if (imgWidth >= 300) {
+      fontSize = 16;
+    } else if (imgWidth >= 200) {
+      fontSize = 12;
+    } else {
+      fontSize = 8;
     }
     console.log(imgWidth, imgHeight, fontSize);
 
